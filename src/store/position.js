@@ -7,13 +7,20 @@ const getters = {
 }
 
 const actions = {
-  updatePosition: ({ commit }) => {
-    commit('setCurrentPos', null)
+  run: ({ commit }) => {
+    if (state.position === 16) {
+      commit('setCurrentPos', 0);
+    } else {
+      commit('setCurrentPos', state.position + 1)
+    }
+  },
+  stop: ({ commit }) => {
+    commit('setCurrentPos', 0);
   }
 }
 
 const mutations = {
-    setCurrentPos: state => state.position === 16 ? 0 : state.position++ 
+    setCurrentPos: (state, position) => state.position = position
 }
 
 export default {
