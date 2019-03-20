@@ -1,8 +1,20 @@
 <template>
   <div>
     <div class="main-grid">
-      <div class="main-row row-1">
-        <Step v-for="n in 16" class="step" :key="n" :pos="n"/>
+      <div class="main-row">
+        <Step v-for="n in 16" :key="n" :pos="n" effect="hihat"/>
+      </div>
+      <div class="main-row">
+        <Step v-for="n in 16" :key="n" :pos="n" effect="cowbell"/>
+      </div>
+      <div class="main-row">
+        <Step v-for="n in 16" :key="n" :pos="n" effect="clap"/>
+      </div>
+      <div class="main-row">
+        <Step v-for="n in 16" :key="n" :pos="n" effect="snare"/>
+      </div>
+      <div class="main-row">
+        <Step v-for="n in 16" :key="n" :pos="n" effect="kick"/>
       </div>
     </div>
     <div class="main-controls">
