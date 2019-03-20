@@ -12,7 +12,7 @@
 
 <script>
 /* eslint-disable */
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 export default {
   name:'Step',
   data: function() {
@@ -20,35 +20,31 @@ export default {
       clicked: false
     }
   },
-  // mounted() {
-  //   this.id = this._uid;
-  //   this.audio = this.$refs[this.id];
-  //   this.audio.setAttribute('crossOrigin', 'anonymous');  
-  // },
   updated() {
     if (this.position.position === this.$props.pos && this.clicked == true) {
-      // const playPromise = this.audio.play();
-      // if(playPromise !== undefined) {
-      //   playPromise.then(() => {
-      //     console.log(result);
-      //   }).catch(error => {
-      //     this.audio.play();
-      //   });
-      // }
       this.play(this.effectSrc);
     }
   },
   props: {
     pos: Number,
-    effect: String
+    effect: String,
+    clear: Boolean
   },
   methods: {
+    ...mapActions(['unclear']),
     click() {
+      this.unclear();
       this.clicked = !this.clicked;
     },
     play(src) {
       const audio = new Audio(src);
       audio.play();
+    }
+  },
+  watch: {
+    clear(newValue, oldValue) {
+      if (oldValue === false && newValue === true)
+      this.clicked = false;
     }
   },
   computed: mapState({

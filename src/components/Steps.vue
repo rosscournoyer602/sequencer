@@ -2,23 +2,24 @@
   <div>
     <div class="main-grid">
       <div class="main-row">
-        <Step v-for="n in 16" :key="n" :pos="n" effect="hihat"/>
+        <Step v-for="n in 16" :key="n" :pos="n" effect="hihat" :clear="clear"/>
       </div>
       <div class="main-row">
-        <Step v-for="n in 16" :key="n" :pos="n" effect="cowbell"/>
+        <Step v-for="n in 16" :key="n" :pos="n" effect="cowbell" :clear="clear"/>
       </div>
       <div class="main-row">
-        <Step v-for="n in 16" :key="n" :pos="n" effect="clap"/>
+        <Step v-for="n in 16" :key="n" :pos="n" effect="clap" :clear="clear"/>
       </div>
       <div class="main-row">
-        <Step v-for="n in 16" :key="n" :pos="n" effect="snare"/>
+        <Step v-for="n in 16" :key="n" :pos="n" effect="snare" :clear="clear"/>
       </div>
       <div class="main-row">
-        <Step v-for="n in 16" :key="n" :pos="n" effect="kick"/>
+        <Step v-for="n in 16" :key="n" :pos="n" effect="kick" :clear="clear"/>
       </div>
     </div>
     <div class="main-controls">
       <button @click="play">Play</button>
+      <button @click="clearAllSteps">Clear</button>
       <button @click="reset">Stop</button>
     </div>
   </div>
@@ -34,7 +35,7 @@ export default {
     Step
   },
   methods: {
-    ...mapActions(['run', 'stop']),
+    ...mapActions(['run', 'stop', 'clearSteps']),
     play() {
       clearInterval(this.playbackLoop);
       this.playbackLoop = setInterval(() => this.run(), 120);
@@ -42,10 +43,14 @@ export default {
     reset() {
       clearInterval(this.playbackLoop);
       this.stop();
+    },
+    clearAllSteps() {
+      this.clearSteps();
     }
   },
   computed: mapState({
-    position: state => state.position
+    position: state => state.position,
+    clear: state => state.clear.clear
   })
 }
 </script>
