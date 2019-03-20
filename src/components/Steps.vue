@@ -37,7 +37,7 @@ export default {
     ...mapActions(['run', 'stop']),
     play() {
       clearInterval(this.playbackLoop);
-      this.playbackLoop = setInterval(() => this.run(), 160);
+      this.playbackLoop = setInterval(() => this.run(), 120);
     },
     reset() {
       clearInterval(this.playbackLoop);

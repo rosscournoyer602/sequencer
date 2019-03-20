@@ -9,7 +9,7 @@ const getters = {
 const actions = {
   run: ({ commit }) => {
     if (state.position === 16) {
-      commit('setCurrentPos', 0);
+      commit('setCurrentPos', 1);
     } else {
       commit('setCurrentPos', state.position + 1)
     }
