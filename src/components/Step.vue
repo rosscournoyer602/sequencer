@@ -2,7 +2,7 @@
   <div 
     class="step" 
     :class="[
-      this.position.position === pos ? 'pink' : '', 
+      this.position.position === pos ? 'green' : '', 
       this.clicked === true ? 'clicked' : '',
       this.position.position === pos && this.clicked === true ? 'played' : '']" 
     @click="click">
@@ -77,7 +77,7 @@ export default {
     width: 15px;
     background-color: black;
   }
-  .pink {
+  .green {
     background-color: green;
   }
   .clicked {
