@@ -56,15 +56,15 @@ export default {
     effectSrc: function() {
       switch (this.effect) {
         case 'hihat':
-          return '/assets/audio/HiHats04.wav';
+          return './audio/HiHats04.wav';
         case 'cowbell':
-          return '/assets/audio/Cowbell1.wav';
+          return './audio/Cowbell1.wav';
         case 'clap':
-          return '/assets/audio/Clap11.wav';
+          return './audio/Clap11.wav';
         case 'snare':
-          return '/assets/audio/Snare26.wav';
+          return './audio/Snare26.wav';
         case 'kick':
-          return '/assets/audio/Kicks02.wav';
+          return './audio/Kicks02.wav';
         default:
          return '';
       }
