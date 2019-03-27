@@ -21,6 +21,9 @@
       <button @click="play">Play</button>
       <button @click="clearAllSteps">Clear</button>
       <button @click="reset">Stop</button>
+      <div class="audio-toggle">
+        <img :src="mute" @click="toggleAudio" />
+      </div>
     </div>
   </div>
 </template>
@@ -35,7 +38,7 @@ export default {
     Step
   },
   methods: {
-    ...mapActions(['run', 'stop', 'clearSteps']),
+    ...mapActions(['run', 'stop', 'clearSteps', 'toggleMute']),
     play() {
       clearInterval(this.playbackLoop);
       this.playbackLoop = setInterval(() => this.run(), 120);
@@ -46,11 +49,20 @@ export default {
     },
     clearAllSteps() {
       this.clearSteps();
+    },
+    toggleAudio() {
+      this.toggleMute()
     }
   },
   computed: mapState({
     position: state => state.position,
-    clear: state => state.clear.clear
+    clear: state => state.clear.clear,
+    mute: function(state) {
+      if (state.mute.mute === true) {
+        return '/images/volume-mute-solid.svg'
+      }
+      return '/images/volume-up-solid.svg'
+    }
   })
 }
 </script>
@@ -85,6 +97,16 @@ export default {
   .main-controls button {
     display: inline-block;
     margin: 0 20px;
+  }
+  /* .audio-toggle {
+    width: 350px;
+    text-align: center;
+  } */
+  .audio-toggle img {
+    height: 20px;
+    width: 20px;
+    color: gray;
+    margin: 10px auto;
   }
 </style>
 
