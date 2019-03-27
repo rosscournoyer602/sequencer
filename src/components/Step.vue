@@ -12,7 +12,7 @@
 
 <script>
 /* eslint-disable */
-import { mapState, mapActions } from 'vuex';
+import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
   name:'Step',
   data: function() {
@@ -32,13 +32,23 @@ export default {
   },
   methods: {
     ...mapActions(['unclear']),
+    ...mapGetters(['getMute']),
     click() {
       this.unclear();
       this.clicked = !this.clicked;
+      // this.audio = new Audio(this.effectSrc);
+      this.audio = new Audio(this.effectSrc);
+      if (this.getMute() !== true) {
+        // this.audio = new Audio(this.effectSrc);
+        this.audio.play();
+      }
     },
     play(src) {
       const audio = new Audio(src);
-      audio.play();
+      if (this.getMute() !== true) {
+        this.audio = new Audio(this.effectSrc);
+        this.audio.play();
+      }
     }
   },
   watch: {

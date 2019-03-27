@@ -52,6 +52,8 @@ export default {
     },
     toggleAudio() {
       this.toggleMute()
+      const dummyAudio = new Audio('./audio/silence.wav');
+      dummyAudio.play();
     }
   },
   computed: mapState({
