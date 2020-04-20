@@ -21,7 +21,7 @@
       <button class="main-controls__button" @click="play">Play</button>
       <button class="main-controls__button" @click="clearAllSteps">Clear</button>
       <button class="main-controls__button" @click="reset">Stop</button>
-      <div class="audio-toggle">
+      <div class="main-controls__audio-toggle">
         <img :src="mute" @click="toggleAudio" />
       </div>
     </div>
@@ -102,7 +102,7 @@ export default {
     margin: 0 20px;
   }
   
-  .audio-toggle img {
+  .main-controls__audio-toggle img {
     height: 20px;
     width: 20px;
     color: gray;
