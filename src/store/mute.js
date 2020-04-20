@@ -1,5 +1,6 @@
 const state = {
-  mute: true 
+  mute: true,
+  silentFile: new Audio('../audio/silence.wav')
 };
 
 const getters = {
@@ -8,6 +9,7 @@ const getters = {
 
 const actions = {
   toggleMute: ({ commit }) => {
+    state.silentFile.play();
     commit('setMute')
   }
 }

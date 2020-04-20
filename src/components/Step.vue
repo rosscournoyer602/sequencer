@@ -2,27 +2,25 @@
   <div 
     class="step" 
     :class="[
-      this.position.position === pos ? 'green' : '', 
-      this.clicked === true ? 'clicked' : '',
-      this.position.position === pos && this.clicked === true ? 'played' : '']" 
+      this.position.position === pos ? 'step--green' : '', 
+      this.clicked === true ? 'step--clicked' : '',
+      this.position.position === pos && this.clicked === true ? 'step--played' : '']" 
     @click="click">
-      <!-- <audio :ref="this._uid" :src="effectSrc" type="audio/wav" /> -->
   </div>
 </template>
 
 <script>
-/* eslint-disable */
 import { mapState, mapActions, mapGetters } from 'vuex';
 export default {
   name:'Step',
-  data: function() {
+  data() {
     return {
       clicked: false
     }
   },
   updated() {
     if (this.position.position === this.$props.pos && this.clicked == true) {
-      this.play(this.effectSrc);
+      this.play();
     }
   },
   props: {
@@ -32,22 +30,21 @@ export default {
   },
   methods: {
     ...mapActions(['unclear']),
-    ...mapGetters(['getMute']),
+    ...mapGetters(['getMute', 'getSounds', 'getAudioContext']),
     click() {
       this.unclear();
       this.clicked = !this.clicked;
-      // this.audio = new Audio(this.effectSrc);
-      this.audio = new Audio(this.effectSrc);
-      if (this.getMute() !== true) {
-        // this.audio = new Audio(this.effectSrc);
-        this.audio.play();
-      }
     },
-    play(src) {
-      const audio = new Audio(src);
+    play() {
+      const sounds = this.getSounds();
+      const context = this.getAudioContext();
       if (this.getMute() !== true) {
-        this.audio = new Audio(this.effectSrc);
-        this.audio.play();
+        const sound = context.createBufferSource();
+        sound.buffer = sounds[this.effect];
+        sound.connect(context.destination);
+        // eslint-disable-next-line no-console
+        console.log('SOUND', sound)
+        sound.start();
       }
     }
   },
@@ -59,18 +56,18 @@ export default {
   },
   computed: mapState({
     position: state => state.position,
-    effectSrc: function() {
+    effectSrc: state => {
       switch (this.effect) {
         case 'hihat':
-          return './audio/HiHats04.wav';
+          return state.audio.hihat;
         case 'cowbell':
-          return './audio/Cowbell1.wav';
+          return state.audio.cowbell;
         case 'clap':
-          return './audio/Clap11.wav';
+          return state.audio.clap;
         case 'snare':
-          return './audio/Snare26.wav';
+          return state.audio.snare;
         case 'kick':
-          return './audio/Kicks02.wav';
+          return state.audio.kick;
         default:
          return '';
       }
@@ -85,18 +82,15 @@ export default {
     margin: 5px auto;
     height: 15px;
     width: 15px;
-    background-color: black;
+    background-color: rgb(129, 129, 129);
   }
-  .green {
-    background-color: green;
+  .step--green {
+    background-color: rgb(83, 243, 83);
   }
-  .clicked {
+  .step--clicked {
     background-color: aqua;
   }
-  .played {
+  .step--played {
     background-color: hotpink !important;
-  }
-  audio {
-    display: none;
   }
 </style>
