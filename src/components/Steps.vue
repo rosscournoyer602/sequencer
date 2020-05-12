@@ -47,8 +47,6 @@ export default {
     play() {
       clearInterval(this.playbackLoop);
       this.playbackLoop = setInterval(() => this.run(), 120);
-      const dummyAudio = new Audio('./audio/silence.wav');
-      dummyAudio.play();
     },
     reset() {
       clearInterval(this.playbackLoop);

@@ -1,5 +1,5 @@
 const state = {
-  mute: false,
+  mute: true,
   silentFile: new Audio('../audio/silence.wav')
 };
 
