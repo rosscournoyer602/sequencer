@@ -108,7 +108,6 @@ export default {
     color: gray;
     margin: 10px auto;
   }
-  
 </style>
 
 
